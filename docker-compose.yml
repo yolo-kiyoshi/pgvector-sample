@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.9"
 services:
   postgres:
     build:
@@ -6,7 +6,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_PASSWORD=passw0rd
-    restart: always
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  
